@@ -1,8 +1,8 @@
 # [Running location tracking App]
 
-![Begin](https://raw.githubusercontent.com/devnowcafe/runx/master/screenshots/begin.png){:width="30%"}
-![Running](https://raw.githubusercontent.com/devnowcafe/runx/master/screenshots/begin.png){:width="30%"}
-![Finished](https://raw.githubusercontent.com/devnowcafe/runx/master/screenshots/finished.png){:width="30%"}
+<img src="https://raw.githubusercontent.com/devnowcafe/runx/master/screenshots/begin.png" width="280">
+<img src="https://raw.githubusercontent.com/devnowcafe/runx/master/screenshots/running.png" width="280">
+<img src="https://raw.githubusercontent.com/devnowcafe/runx/master/screenshots/finished.png" width="280">
 
 ## Clone & Install Dependencies
 
