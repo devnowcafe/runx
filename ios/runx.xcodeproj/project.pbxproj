@@ -47,7 +47,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8E1445C021116B2C00CB1241 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E1445BD21116B1D00CB1241 /* libRNSpinkit.a */; };
 		8E6AEE9621115563004462F2 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6AEE9321115549004462F2 /* libRNBackgroundTimer.a */; };
-		8EA5060D21115BEB006CB28B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EA505E321115BEB006CB28B /* GoogleService-Info.plist */; };
 		8ECC2F7D2110D36000B48693 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ECC2F7C2110D34700B48693 /* libReactNativeNavigation.a */; };
 		8EE1D99A21121CBE00A01C6D /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1D96C21121CBE00A01C6D /* RNBackgroundFetch+AppDelegate.m */; };
 		8EE1D9A221121DA500A01C6D /* libRNBackgroundFetch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EE1D9A121121DA500A01C6D /* libRNBackgroundFetch.a */; };
@@ -425,7 +424,6 @@
 		8CCD657F12444D4F9F9AA200 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		8E1445B721116B1C00CB1241 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		8E6AEE6621115549004462F2 /* RNBackgroundTimer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundTimer.xcodeproj; path = "../node_modules/react-native-background-timer/ios/RNBackgroundTimer.xcodeproj"; sourceTree = "<group>"; };
-		8EA505E321115BEB006CB28B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8ECC2F772110D34700B48693 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		8EE1D96C21121CBE00A01C6D /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		8EE1D99B21121D8C00A01C6D /* RNBackgroundGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundGeolocation.xcodeproj; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation.xcodeproj"; sourceTree = "<group>"; };
@@ -593,7 +591,6 @@
 			isa = PBXGroup;
 			children = (
 				8EE1D96C21121CBE00A01C6D /* RNBackgroundFetch+AppDelegate.m */,
-				8EA505E321115BEB006CB28B /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1343,7 +1340,6 @@
 				E7BD4BE1E7CA4B1DB320AB2D /* Ionicons.ttf in Resources */,
 				C9DABD8ABDDF4AB885362A95 /* MaterialCommunityIcons.ttf in Resources */,
 				222DDBFF4A6645199E44B1B5 /* MaterialIcons.ttf in Resources */,
-				8EA5060D21115BEB006CB28B /* GoogleService-Info.plist in Resources */,
 				2935040399AC471EA3665656 /* Octicons.ttf in Resources */,
 				5652A96B159B411393EF7BD0 /* Roboto_medium.ttf in Resources */,
 				F4E15CEAECC0432196363598 /* Roboto.ttf in Resources */,
