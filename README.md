@@ -12,5 +12,13 @@
 4) **[iOS]** `cd ios` and run `pod install` - if you don't have CocoaPods you can follow [these instructions](https://guides.cocoapods.org/using/getting-started.html#getting-started) to install it.
 5) **[Android]** not yet supported.
 
+# roadmap
+- Android supported
+- Login/Logout user
+- Share your route
+- Analyze your activity
 
 
+# Contributing
+
+Welcome! Welcome! Welcome! 
