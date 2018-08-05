@@ -14,6 +14,7 @@
 
 # roadmap
 - Android supported
+- Firebase integration
 - Login/Logout user
 - Share your route
 - Analyze your activity
