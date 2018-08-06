@@ -424,6 +424,7 @@
 		8CCD657F12444D4F9F9AA200 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		8E1445B721116B1C00CB1241 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		8E6AEE6621115549004462F2 /* RNBackgroundTimer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundTimer.xcodeproj; path = "../node_modules/react-native-background-timer/ios/RNBackgroundTimer.xcodeproj"; sourceTree = "<group>"; };
+		8E74890621170D8200E6BBA1 /* runx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = runx.entitlements; path = runx/runx.entitlements; sourceTree = "<group>"; };
 		8ECC2F772110D34700B48693 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		8EE1D96C21121CBE00A01C6D /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		8EE1D99B21121D8C00A01C6D /* RNBackgroundGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundGeolocation.xcodeproj; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation.xcodeproj"; sourceTree = "<group>"; };
@@ -590,6 +591,7 @@
 		13B07FAE1A68108700A75B9A /* runx */ = {
 			isa = PBXGroup;
 			children = (
+				8E74890621170D8200E6BBA1 /* runx.entitlements */,
 				8EE1D96C21121CBE00A01C6D /* RNBackgroundFetch+AppDelegate.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -900,8 +902,12 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 4ZDSY4722K;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1540,6 +1546,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = runx/runx.entitlements;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 4ZDSY4722K;
@@ -1562,8 +1570,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.runx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devnow.runx;
 				PRODUCT_NAME = runx;
+				PROVISIONING_PROFILE = "5db893e9-0d5b-42c4-9999-c2dd7edfe14b";
+				PROVISIONING_PROFILE_SPECIFIER = runx_profile_dev;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1574,6 +1584,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = runx/runx.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4ZDSY4722K;
 				HEADER_SEARCH_PATHS = (
@@ -1595,8 +1608,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.runx;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devnow.runx;
 				PRODUCT_NAME = runx;
+				PROVISIONING_PROFILE = "75e90148-2292-4344-b18a-5f75e155750c";
+				PROVISIONING_PROFILE_SPECIFIER = runx_profile;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
