@@ -5,6 +5,7 @@ import BackgroundGeolocation from 'react-native-background-geolocation';
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import Spinner from 'react-native-loading-spinner-overlay';
 import haversine from "haversine";
+import _ from 'lodash';
 import { Configs } from '@configs';
 import styles from './home.style';
 const LATITUDE_DELTA = 0.009;
@@ -29,7 +30,7 @@ export default class HomeScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.getCurrentLocation();
+        this.getCurrentLocation(false);
 
         this.geoLocationListener();
     }
@@ -42,24 +43,54 @@ export default class HomeScreen extends React.Component {
 
     checkRunState = async () => {
         const value = await AsyncStorage.getItem(`${Configs.StorageKey}:runstate`);
-        //console.log("value:", value)
         if (value) {
             const runState = JSON.parse(value);
-            if (runState.state === "running" || runState.state === "paused" || runState.state === "finished") {
+            if (runState.state) {
                 const timeStart = new Date(runState.runAt).getTime();
-                const timeEnd = runState.state === "running" ? new Date().getTime() : new Date(runState.pauseAt).getTime();
-                const timeDiff = (timeEnd - timeStart) / 1000; //in ms
+                let timeDiff = 0;
+                switch (runState.state) {
+                    case "running":
+                        timeDiff = (new Date().getTime() - timeStart) / 1000;
+                        this._interval = setInterval(() => {
+                            this.setState({ runningDuration: this.state.runningDuration + 1 })
+                        }, 1000);
+                        break;
+                    case "paused":
+                        timeDiff = (new Date(runState.pauseAt).getTime() - timeStart) / 1000;
+                        break;
+                    case "finished":
+                        timeDiff = (new Date(runState.finishAt).getTime() - timeStart) / 1000;
+
+                        break;
+                }
+
+                const distance = await BackgroundGeolocation.getOdometer();
+                const locations = await BackgroundGeolocation.getLocations();
+                let coordinates = [];
+                let markers = [...this.state.markers];
+                if (locations.length) {
+                    _.forEach(locations, (item) => {
+                        coordinates.push({ latitude: item.coords.latitude, longitude: item.coords.longitude })
+                    })
+                    markers = [{
+                        key: locations[0].uuid,
+                        title: locations[0].timestamp,
+                        heading: locations[0].coords.heading,
+                        coordinate: {
+                            latitude: locations[0].coords.latitude,
+                            longitude: locations[0].coords.longitude
+                        }
+                    }]
+                }
 
                 this.setState({
                     isLoading: false,
                     runningDuration: timeDiff || 0,
+                    distanceTravelled: (distance / 1000) || 0,
+                    coordinates: coordinates,
+                    markers: markers,
                     runState: runState
                 })
-                if (runState.state === "running") {
-                    this._interval = setInterval(() => {
-                        this.setState({ runningDuration: this.state.runningDuration + 1 })
-                    }, 1000);
-                }
             } else {
                 this.setState({ isLoading: false })
             }
@@ -74,12 +105,16 @@ export default class HomeScreen extends React.Component {
         }
     }
 
-    getCurrentLocation = () => {
+    getCurrentLocation = (resetGeo) => {
         BackgroundGeolocation.getCurrentPosition((location) => {
-            console.log('- getCurrentPosition success: ', location);
+            //console.log('- getCurrentPosition success: ', location);
             this.addMarker(location);
             this.setCenter(location)
-            this.checkRunState();
+            if (resetGeo) {
+                this.resetGeoLocation();
+            } else {
+                this.checkRunState();
+            }
         }, (error) => {
             console.warn('- getCurrentPosition error: ', error);
         }, { persist: true, samples: 1 });
@@ -87,7 +122,7 @@ export default class HomeScreen extends React.Component {
 
     geoLocationListener = () => {
         BackgroundGeolocation.on('location', (location) => {
-            console.log('[event] location: ', location);
+            //console.log('[event] location: ', location);
 
             if (!location.sample) {
                 const newCoordinate = {
@@ -156,11 +191,11 @@ export default class HomeScreen extends React.Component {
                 case 'paused':
                     runState = { ...this.state.runState, state: 'paused', pauseAt: new Date() };
                     clearInterval(this._interval);
-                    BackgroundGeolocation.stop();
+                    BackgroundGeolocation.stopWatchPosition();
                     break;
                 case 'resume':
                     runState = { ...this.state.runState, state: 'running' };
-                    BackgroundGeolocation.start();
+                    BackgroundGeolocation.watchPosition();
                     this._interval = setInterval(() => {
                         this.setState({ runningDuration: this.state.runningDuration + 1 })
                     }, 1000);
@@ -178,16 +213,24 @@ export default class HomeScreen extends React.Component {
     }
 
     handleRunReset = async () => {
-        const { markers, coordinates } = this.state;
         await AsyncStorage.removeItem(`${Configs.StorageKey}:runstate`, null);
 
         this.setState({
+            isLoading: true,
             runState: {},
             runningDuration: 0,
             distanceTravelled: 0,
-            markers: [markers[markers.length - 1]],
-            coordinates: [coordinates[coordinates.length - 1]]
+            markers: [],
+            coordinates: []
+        }, () => {
+            this.getCurrentLocation(true)
         })
+    }
+
+    resetGeoLocation = async () => {
+        await BackgroundGeolocation.setOdometer(0);
+        await BackgroundGeolocation.destroyLocations();
+        this.setState({ isLoading: false })
     }
 
     renderActions = () => {
